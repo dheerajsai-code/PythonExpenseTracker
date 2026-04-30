@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Recurring Expenses | Expense Tracker{% endblock %}
+
+{% block content %}
+<section class="panel form-panel" style="margin-bottom: 2rem;">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Subscriptions & Regulars</p>
+            <h2>Schedule a recurring expense</h2>
+        </div>
+    </div>
+
+    <form method="post" class="expense-form">
+        <label>
+            Amount
+            <input
+                type="number"
+                step="0.01"
+                min="0.01"
+                name="amount"
+                value="{{ form_data.get('amount', '') }}"
+                placeholder="e.g. 9.99"
+                required
+            >
+        </label>
+
+        <label>
+            Category
+            <input
+                type="text"
+                name="category"
+                value="{{ form_data.get('category', '') }}"
+                placeholder="e.g. Subscriptions, Rent"
+                required
+            >
+        </label>
+
+        <label>
+            Description
+            <input
+                type="text"
+                name="description"
+                value="{{ form_data.get('description', '') }}"
+                placeholder="e.g. Spotify Premium, Gym Membership"
+                required
+            >
+        </label>
+
+        <label>
+            Frequency
+            <select name="frequency" required>
+                <option value="daily" {% if form_data.get('frequency') == 'daily' %}selected{% endif %}>Daily</option>
+                <option value="weekly" {% if form_data.get('frequency') == 'weekly' %}selected{% endif %}>Weekly</option>
+                <option value="monthly" {% if form_data.get('frequency', 'monthly') == 'monthly' %}selected{% endif %}>Monthly</option>
+                <option value="yearly" {% if form_data.get('frequency') == 'yearly' %}selected{% endif %}>Yearly</option>
+            </select>
+        </label>
+
+        <label>
+            First Due Date / Start Date
+            <input
+                type="date"
+                name="start_date"
+                value="{{ form_data.get('start_date', '') }}"
+                required
+            >
+        </label>
+
+        <div class="form-actions">
+            <button type="submit">Schedule Expense</button>
+        </div>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Active Schedules</p>
+            <h3>Your scheduled recurring expenses</h3>
+        </div>
+    </div>
+
+    {% if recurring_expenses %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Frequency</th>
+                    <th>Next Due Date</th>
+                    <th>Last Processed</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in recurring_expenses %}
+                <tr>
+                    <td><strong>{{ expense.category }}</strong></td>
+                    <td>{{ expense.description }}</td>
+                    <td>${{ "%.2f"|format(expense.amount) }}</td>
+                    <td><span style="text-transform: capitalize;">{{ expense.frequency }}</span></td>
+                    <td>{{ expense.next_due_date }}</td>
+                    <td>{{ expense.last_processed_date or 'Never' }}</td>
+                    <td>
+                        <form method="post" action="{{ url_for('remove_recurring', recurring_id=expense.id) }}">
+                            <button type="submit" class="danger-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No recurring schedules configured yet.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

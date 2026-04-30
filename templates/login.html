@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Expense Tracker{% endblock %}
+
+{% block content %}
+<section class="panel form-panel">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Welcome Back</p>
+            <h2>Log in to your account</h2>
+        </div>
+    </div>
+
+    <form method="post" class="expense-form">
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        <label>
+            Username
+            <input
+                type="text"
+                name="username"
+                value="{{ username or '' }}"
+                autocomplete="username"
+                required
+            >
+        </label>
+
+        <label>
+            Password
+            <input
+                type="password"
+                name="password"
+                autocomplete="current-password"
+                required
+            >
+        </label>
+
+        <div class="form-actions">
+            <button type="submit">Log In</button>
+        </div>
+    </form>
+
+    <div class="form-footer" style="margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem;">
+        Don't have an account? <a href="{{ url_for('register') }}" style="color: var(--accent); text-decoration: underline;">Register here</a>
+    </div>
+</section>
+{% endblock %}

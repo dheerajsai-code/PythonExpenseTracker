@@ -1,0 +1,386 @@
+:root {
+    --bg: #f6f2e8;
+    --panel: #fffdf8;
+    --panel-strong: #fff7e7;
+    --text: #1f2933;
+    --muted: #5b6670;
+    --border: #d7c7a8;
+    --accent: #b85c38;
+    --accent-dark: #8f4428;
+    --success-bg: #e6f6ec;
+    --success-text: #1c6b42;
+    --error-bg: #fdecec;
+    --error-text: #a12c2c;
+    --shadow: 0 18px 40px rgba(88, 64, 27, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at top left, rgba(184, 92, 56, 0.16), transparent 28%),
+        linear-gradient(180deg, #f9f5ed 0%, var(--bg) 100%);
+    color: var(--text);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header {
+    border-bottom: 1px solid rgba(215, 199, 168, 0.9);
+    background: rgba(255, 250, 240, 0.88);
+    backdrop-filter: blur(10px);
+}
+
+.header-inner,
+.page-shell {
+    width: min(1100px, calc(100% - 2rem));
+    margin: 0 auto;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 0;
+}
+
+.header-inner h1,
+.panel-header h2,
+.panel-header h3,
+.hero-card h2 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.eyebrow {
+    margin: 0 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.nav-links a,
+button,
+.primary-link,
+.secondary-link {
+    border-radius: 999px;
+    padding: 0.72rem 1.1rem;
+    transition: 0.2s ease;
+}
+
+.nav-links a,
+.secondary-link {
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.nav-links a:hover,
+.secondary-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page-shell {
+    padding: 2rem 0 3rem;
+}
+
+.flash-stack {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.flash {
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    border: 1px solid transparent;
+}
+
+.flash-success {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.flash-error {
+    background: var(--error-bg);
+    color: var(--error-text);
+}
+
+.hero-card,
+.panel {
+    background: var(--panel);
+    border: 1px solid rgba(215, 199, 168, 0.9);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+.hero-card {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-copy {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.stats-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--panel-strong);
+    border: 1px solid rgba(215, 199, 168, 0.9);
+    border-radius: 20px;
+    padding: 1rem 1.1rem;
+}
+
+.stat-label {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+}
+
+.panel {
+    padding: 1.5rem;
+}
+
+.panel-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: end;
+}
+
+.sort-form label,
+.expense-form label {
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+}
+
+select,
+input,
+textarea,
+button {
+    font: inherit;
+}
+
+select,
+input,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.8rem 0.9rem;
+    background: #fff;
+    color: var(--text);
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid rgba(184, 92, 56, 0.2);
+    border-color: var(--accent);
+}
+
+button,
+.primary-link {
+    border: none;
+    background: var(--accent);
+    color: #fffaf4;
+    cursor: pointer;
+}
+
+button:hover,
+.primary-link:hover {
+    background: var(--accent-dark);
+}
+
+.danger-button {
+    background: #8d2f3a;
+}
+
+.danger-button:hover {
+    background: #6d2029;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.row-actions {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.compact-link {
+    padding: 0.6rem 0.95rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.95rem 0.85rem;
+    border-bottom: 1px solid rgba(215, 199, 168, 0.8);
+}
+
+thead th {
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+tbody tr:hover {
+    background: rgba(255, 247, 231, 0.7);
+}
+
+.empty-state {
+    display: grid;
+    gap: 0.8rem;
+    justify-items: start;
+    padding: 2rem 0;
+}
+
+.form-panel {
+    max-width: 720px;
+}
+
+.expense-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+@media (max-width: 860px) {
+    .hero-card,
+    .panel-header,
+    .header-inner {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    .nav-links,
+    .sort-form,
+    .form-actions {
+        width: 100%;
+    }
+
+    .nav-links a,
+    .sort-form label,
+    .sort-form button,
+    .form-actions a,
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+/* User greeting in navbar */
+.user-greeting {
+    font-size: 0.95rem;
+    color: var(--muted);
+    align-self: center;
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 860px) {
+    .user-greeting {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Analytics Grid */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 860px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.chart-container {
+    background: var(--panel-strong);
+    border: 1px solid rgba(215, 199, 168, 0.6);
+    border-radius: 20px;
+    padding: 1.25rem;
+}
+
+/* Progress bar container and fills for budgets */
+.progress-bar-container {
+    background: rgba(215, 199, 168, 0.3) !important;
+    border-radius: 999px;
+    height: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(215, 199, 168, 0.5);
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-success {
+    background: #2e7d32; /* Rich success green */
+}
+
+.progress-warning {
+    background: var(--accent); /* Terracotta */
+}
+
+.progress-danger {
+    background: #c62828; /* Rich danger red */
+}

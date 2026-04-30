@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Budgets | Expense Tracker{% endblock %}
+
+{% block content %}
+<section class="panel form-panel" style="margin-bottom: 2rem;">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Category Budgets</p>
+            <h2>Set monthly budget limits</h2>
+        </div>
+    </div>
+
+    <form method="post" class="expense-form">
+        <label>
+            Category
+            <input
+                type="text"
+                name="category"
+                placeholder="e.g. Food, Travel, Utilities"
+                required
+            >
+        </label>
+
+        <label>
+            Monthly Limit
+            <input
+                type="number"
+                step="0.01"
+                min="0.01"
+                name="amount"
+                placeholder="e.g. 150.00"
+                required
+            >
+        </label>
+
+        <div class="form-actions">
+            <button type="submit">Set Budget</button>
+        </div>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Active Budgets</p>
+            <h3>Current limits by category</h3>
+        </div>
+    </div>
+
+    {% if budgets %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Monthly Limit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for budget in budgets %}
+                <tr>
+                    <td><strong>{{ budget.category }}</strong></td>
+                    <td>${{ "%.2f"|format(budget.amount) }}</td>
+                    <td>
+                        <form method="post" action="{{ url_for('remove_budget', budget_id=budget.id) }}">
+                            <button type="submit" class="danger-button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No budgets configured yet.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
